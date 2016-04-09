@@ -2,7 +2,7 @@
 $(document).on("mobileinit", function () {
     $.mobile.defaultPageTransition = "none";
     $.mobile.defaultDialogTransition = "none";
-    //usersListPage.init();
+    usersListPage.init();
     communicator.init();
     accelerometer.init();
 });
@@ -101,6 +101,15 @@ var communicator = (function () {
     }
 })();
 
+var html = {
+    li: function (txt) {
+        return "<li>" + txt + "</li>";
+    },
+    img: function (src, alt, cls, clsContainer) {
+        return "<div class='" + clsContainer + "'><img alt='" + alt + "' src='" + src + "' class='" + cls + "' /></div>";
+    },
+}
+
 var accelerometer = (function () {
     var transforms = ["-webkit-transform", "-moz-transform", "-ms-transform", "transform"];
 
@@ -133,22 +142,27 @@ var usersListPage = (function () {
     var listUsers = $("#users");
 
     var onGetUserListSuccess = function (data) {
-        listUsers.html("");
-        if (data && data.length <= 0) {
-            createListItem("No users", false);
-        } else {
-            data.forEach(function (user) {
-                //"<li>" + user.user + " - " + user.pass + "</li>"
-                createListItem(user, true);
-            });
-        }
+        listUsers = data;
+        var usersHtml = $("#users");
+
+        listUsers.forEach(function (u) {
+            var item = html.li('<a class="conversations" data-user="' + u.user + '"><div class="square"><img id="box-phone-'
+                + u.user + '" src="img/phone.png" /></div>&nbsp;Dupla '
+                + u.user + '</a>');
+            usersHtml.append(item);
+        });
+
         listUsers.listview("refresh");
+        //bindPageNavigationEvent();
     }
 
     var createListItem = function (value, isUsers) {
-        var clonedLi = $("li[data-template-user='true']").clone().removeAttr("ata-template-user").appendTo(listUsers);
+        var clonedLi = $("li[data-template-user='true']").clone().removeAttr("data-template-user").appendTo(listUsers);
         if (isUsers) {
             var childrens = clonedLi.children();
+            //$(childrens[0]).children().html(value.user);
+            $(childrens[1]).html(value.user);
+            //console.log(childrens);
         } else {
             clonedLi.html(value);
         }
@@ -165,7 +179,7 @@ var usersListPage = (function () {
     }
 
     return {
-        myKey: 'k',
+        myKey: 'a',
         init: function () {
             getUserList();
         }
