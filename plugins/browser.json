@@ -12,6 +12,12 @@
         },
         "cordova-plugin-browsersync": {
             "PACKAGE_NAME": "io.cordova.appsample"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "io.cordova.appsample"
+        },
+        "cordova-plugin-device-motion": {
+            "PACKAGE_NAME": "io.cordova.appsample"
         }
     },
     "dependent_plugins": {}

@@ -28,7 +28,7 @@
         * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
             * Enable inline JS: add 'unsafe-inline' to default-src
     -->
-    <meta http-equiv="Content-Security-Policy" content="default-src &apos;self&apos; data: gap: https://ssl.gstatic.com &apos;unsafe-eval&apos;; style-src &apos;self&apos; &apos;unsafe-inline&apos;; media-src *">
+    <meta http-equiv="Content-Security-Policy" content="default-src &apos;self&apos; &apos;unsafe-inline&apos; data: gap: https://ssl.gstatic.com &apos;unsafe-eval&apos;; style-src &apos;self&apos; &apos;unsafe-inline&apos;; media-src *; script-src *">
     <meta name="format-detection" content="telephone=no">
     <meta name="msapplication-tap-highlight" content="no">
     <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -37,15 +37,34 @@
     <title>Hello World</title>
 </head>
 <body>
+    <ul class="templates">
+        <li data-template-message-img="true"><img></img></li>
+        <li data-template-message-text="true"></li>
+        <li data-template-user="true">
+            <a>
+                <div class="square">
+                    <img src="img/phone.png" />
+                </div>
+            </a>
+            <input type="hidden" />
+        </li>
+    </ul>
     <!-- page 1 -->
     <div data-role="page" id="homePage">
         <div data-role="header">
             <h1>Home</h1>
         </div>
-        <ul data-role="listview">
-            <li><a href="#page1">Page1</a></li>
-            <li><a href="#page2">Page2</a></li>
-            <li><a href="#page3">Page3</a></li>
+        <ul data-role="listview" id="users">
+            <li>
+                <a href="#page1">
+                    <div class="square">
+                        <img id="box-phone-d1" src="img/phone.png" />
+                    </div>
+                    Thiago
+                </a>
+            </li>
+            <li><a href="#page2">Rodrigo</a></li>
+            <li><a href="#page3">Ricardo</a></li>
         </ul>
 
         <div data-role="footer" data-position="fixed">
@@ -59,18 +78,28 @@
             <h1>Page1</h1>
         </div>
         <div class="ui-content">
-            <div class="ui-content">
-                <ul data-role="listview" id="messages">
-                    <li>no messages</li>
-                </ul>
-            </div>
+            <ul data-role="listview" id="messages">
+                <li>no messages</li>
+            </ul>
         </div><!-- end page 1 content -->
 
         <div data-role="footer" data-position="fixed">
-            <textarea id="message" placeholder="write your message here"></textarea>
-            <button id="get-photo" data-role="button" data-icon="camera" data-inline="true" data-iconpos="notext"></button>
-            <button id="send-message" data-role="button" data-icon="arrow-r" data-inline="true" data-iconpos="notext"></button>
-            <button id="delete-messages" data-role="button" data-icon="delete" data-inline="true" data-iconpos="notext"></button>
+            <textarea id="message" placeholder="Write your message..."></textarea>
+            <button id="get-photo"
+                    data-role="button"
+                    data-icon="camera"
+                    data-inline="true"
+                    data-iconpos="notext"></button>
+            <button id="send-message"
+                    data-role="button"
+                    data-icon="arrow-r"
+                    data-inline="true"
+                    data-iconpos="notext"></button>
+            <button id="delete-messages"
+                    data-role="button"
+                    data-icon="delete"
+                    data-inline="true"
+                    data-iconpos="notext"></button>
         </div><!-- /footer -->
     </div><!-- /page1 -->
     <!-- page 2 -->
