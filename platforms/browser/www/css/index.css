@@ -116,30 +116,41 @@ h1 {
 
 /* For avoiding title truncation in wp8 */
 .ui-header .ui-title {
-    overflow: visible !important;
+        overflow: visible !important;
 }
 /* For fixing the absolute position issue for the default cordova gen page*/
 #cjp-accordion1 .app {
-    left: 5px !important;
-    margin: 5px !important;
-    position: relative !important;
+        left: 5px !important;
+        margin: 5px !important;
+        position: relative !important;
 }
 
-.square {
+.img-thumb{
+    max-width:200px;
+    min-width:100px; 
+    min-height:100px;
+}
+
+.img-container{
+    overflow: hidden;    
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;    
+    width:100px;
+    height:100px;
+}
+
+.square{
     width:30px;
     display: inline-block;
-    vertical-align: bottom;
-    -webkit-perspective: 100px;
+    vertical-align:bottom;
+    -webkit-perspective: 100px; 
     -moz-perspective: 100px;
-    -ms-perspective: 100px;
+    -ms-perspective: 100px; 
     perspective: 100px;
-    -webkit-transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d; 
     -moz-transform-style: preserve-3d;
-    -ms-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d; 
     transform-style: preserve-3d;
-    margin: 0px 5px;
-}
-
-.conversations {
-
+    margin:0px 5px;
 }

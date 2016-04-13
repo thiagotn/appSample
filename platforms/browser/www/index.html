@@ -27,76 +27,54 @@
         * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
         * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
             * Enable inline JS: add 'unsafe-inline' to default-src
-    -->
-    <meta http-equiv="Content-Security-Policy" content="default-src &apos;self&apos; &apos;unsafe-inline&apos; data: gap: https://ssl.gstatic.com &apos;unsafe-eval&apos;; style-src &apos;self&apos; &apos;unsafe-inline&apos;; media-src *; script-src *">
-    <meta name="format-detection" content="telephone=no">
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <link rel="stylesheet" type="text/css" href="js/jquery-1.5.0.mobile.min.css">
-    <title>Hello World</title>
-</head>
-<body>
-    <ul class="templates">
-        <li data-template-message-img="true"><img></img></li>
-        <li data-template-message-text="true"></li>
-        <li data-template-user="true">
-            <a>
-                <div class="square">
-                    <img src="img/phone.png" />
-                    <!--<label />-->
-                </div>
-            </a>
-            <label />
-            <!--<input type="hidden" />-->
-        </li>
-    </ul>
-    <!-- page 1 -->
-    <div data-role="page" id="homePage">
-        <div data-role="header">
-            <h1>Home</h1>
-        </div>
-        <ul data-role="listview" id="users">
-        </ul>
+        -->
+        <meta http-equiv="Content-Security-Policy" content="default-src &apos;self&apos; data: gap: ws: http: https://ssl.gstatic.com &apos;unsafe-eval&apos;; style-src &apos;self&apos; &apos;unsafe-inline&apos;; media-src * data: blob:">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" type="text/css" href="js/jquery-1.5.0.mobile.min.css">
+        <title>App Sample</title>
+    </head>
+    <body>		<!-- page 1 -->
+    	<div data-role="page" id="homePage">
+    		<div data-role="header">
+    			<h1>Easy Communicator</h1>
+    		</div>
+			<div>Quem eh vc? <input type="text" placeholder="inform your user" id="user-logged" /></div>    		
+    		<ul data-role="listview" id="users">
+    		</ul>
 
-        <div data-role="footer" data-position="fixed">
-            <h1>Home</h1>
-        </div><!-- /footer -->
-    </div> <!-- home page -->
-    <!-- page 1 -->
-    <div data-role="page" id="page">
-        <div data-role="header">
-            <a href="#" data-icon="back" data-rel="back" title="Go back">Voltar</a>
-            <h1>Page1</h1>
-        </div>
-        <div class="ui-content">
-            <ul data-role="listview" id="messages">
-                <li>no messages</li>
-            </ul>
-        </div><!-- end page 1 content -->
+    		<div data-role="footer" data-position="fixed">
+    			<h1>Home</h1>
+    		</div><!-- /footer -->
+    	</div> <!-- home page -->
 
-        <div data-role="footer" data-position="fixed">
-            <textarea id="message" placeholder="Write your message..."></textarea>
-            <button id="get-photo"
-                    data-role="button"
-                    data-icon="camera"
-                    data-inline="true"
-                    data-iconpos="notext"></button>
-            <button id="send-message"
-                    data-role="button"
-                    data-icon="arrow-r"
-                    data-inline="true"
-                    data-iconpos="notext"></button>
-            <button id="delete-messages"
-                    data-role="button"
-                    data-icon="delete"
-                    data-inline="true"
-                    data-iconpos="notext"></button>
-        </div><!-- /footer -->
-    </div><!-- /page1 -->
-    <script type="text/javascript" src="cordova.js"></script>
-    <script type="text/javascript" src="js/jquery-1.11.1.min.js" id="cordova-jquery"></script>
-    <script type="text/javascript" src="js/index.js"></script>
-    <script type="text/javascript" src="js/jquery-1.5.0.mobile.min.js"></script>
-</body>
+    	<!-- page 1 -->
+    	<div data-role="page" id="page">
+    		<div data-role="header">
+    			<a href="#" data-icon="back" data-rel="back" title="Go back">Back</a>
+    			<h1>Page1</h1>
+    		</div>
+
+    		<div class="ui-content">
+				<ul data-role="listview" id="messages">
+				  <li>no messages</li>
+				</ul>
+			</div><!-- end page 1 content -->
+
+    			<div data-role="footer" data-position="fixed">
+	    			<textarea id="message" placeholder="write your message here"></textarea>
+	    			<button id="get-photo" data-role="button" data-icon="camera" data-inline="true" data-iconpos="notext"></button>
+	    			<button id="send-message" data-role="button" data-icon="arrow-r" data-inline="true" data-iconpos="notext"></button>
+					<button id="delete-messages" data-role="button" data-icon="delete" data-inline="true" data-iconpos="notext"></button>
+    			</div><!-- /footer -->
+    		</div><!-- /page1 -->
+
+    		<script type="text/javascript" src="cordova.js"></script>
+    		<script type="text/javascript" src="js/jquery-1.11.1.min.js" id="cordova-jquery"></script>
+    		<!-- como o evento de mobile init é gerado automaticamente, é necessário dar o bind do tratados de eventos antes que o jquery mobile seja carregado -->
+    		<script type="text/javascript" src="js/index.js"></script>
+    		<script type="text/javascript" src="js/jquery-1.5.0.mobile.min.js"></script>    		
+		</body>
 </html>

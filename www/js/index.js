@@ -113,11 +113,21 @@ var socketClient = (function(){
     var onSocketMessage = function(event) {
         var data = JSON.parse(event.data);
 
-        if(data.type === 'accelerometer')
+        if (!communicator) return;
+
+        console.log('data.to: ' + data.to);
+        console.log('geFrom: ' + communicator.getFrom());
+        if (data.type === 'text')
+            communicator.receiveMessage(data.type, data.message, data.from, data.to);
+
+        //if (data.to === communicator.getFrom())
+        //    communicator.receiveMessage(data.type, data.message, data.from);
+        /*
+        if (data.type === 'accelerometer')
             accelerometer.moveOtherUserPhone(data, data.from);
         else if(data.to === communicator.getFrom())
             communicator.receiveMessage(data.type, data.message, data.from);
-
+        */
         console.log('Received: ' + event.data);
     };
 
@@ -128,7 +138,7 @@ var socketClient = (function(){
     return {
         init: function(){
             if(!connected){
-                socket = new WebSocket('ws://127.0.0.1:1337');
+                socket = new WebSocket('ws://127.0.0.1:9000');
                 socket.onmessage = onSocketMessage;
                 socket.onerror = onSocketError;
                 socket.onopen = onSocketOpen;
@@ -288,7 +298,7 @@ var communicator = (function(){
         savedMessages.forEach(function(msg){
             //cria um li para cada item da lista de mensagens
             var fromTxt = 'from ' + msg.user + ': ';
-            if(msg.type === 'text') {messagesHtml.append(html.li(fromTxt + msg.value));}
+            if (msg.type === 'text') { messagesHtml.append(html.li(fromTxt + msg.value)); }
             if(msg.type === 'image64'){
                 var src = "data:image/jpeg;base64," + msg.value;
                 messagesHtml.append(html.li(fromTxt + html.img(src, 'image','img-thumb', 'img-container')));
@@ -322,12 +332,15 @@ var communicator = (function(){
         getFrom: function (){
             return from;
         },
-        receiveMessage: function(type, message, user){
-            storeMessage(type, message, user);
+        receiveMessage: function (type, message, _from, _to) {
+
+            if (from === _to){
+            storeMessage(type, message, from);
             //limpa o textarea
             $('#message').val('');
             //atualiza a lista no html
             renderMessages();            
+            }
         }
     };
 
